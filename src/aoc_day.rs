@@ -3,6 +3,7 @@ use std::{path, fmt, fs};
 use std::fmt::{Display, Formatter};
 use std::error::Error;
 
+#[derive(Debug)]
 pub struct AocDay {
     pub day: u8,
     pub year: u16,
@@ -29,9 +30,8 @@ impl AocDay {
     }
 
     pub fn is_open(&self) -> bool {
-        let start_moment = chrono::Utc
-            .ymd(self.year as i32, 12, self.day as u32)
-            .and_hms(5, 0, 0);
+        let start_moment = chrono::FixedOffset::west_opt(5 * 3600).unwrap()
+            .with_ymd_and_hms(self.year as i32, 12, self.day as u32, 0, 0, 0).unwrap();
         return chrono::Utc::now().ge(&start_moment);
     }
 
