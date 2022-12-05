@@ -62,7 +62,7 @@ impl Runner {
                             day.input_file_url().as_str(),
                             day.input_file_path(),
                         )?;
-                        return Ok(());
+                        Ok(())
                     }
                     Some(false) | None => Ok(())
                 };
