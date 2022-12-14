@@ -1,7 +1,6 @@
-use std::{cmp::Ordering, ops::Index};
+use std::cmp::Ordering;
 
 use aoc2022_niels_overkamp::common::{self, AOCResult};
-use itertools::Itertools;
 use nom::{
     branch::alt,
     bytes::complete::tag,
