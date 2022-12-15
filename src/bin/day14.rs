@@ -43,7 +43,6 @@ pub fn run(input: &Vec<String>) -> AOCResult {
             } else {
                 return Err(format!("Found non straight line: {:?} -> {:?}", p1, p2).into());
             };
-            println!("{:?} -> {:?} hori:{}", p1, p2, hori);
             for v in iter.into_iter() {
                 let p = if hori { (v, p1.1) } else { (p1.0, v) };
                 map.insert(p);
@@ -52,22 +51,8 @@ pub fn run(input: &Vec<String>) -> AOCResult {
     }
 
     let death_plane = *map.iter().map(|(_, y)| y).max().unwrap();
-    println!("plane: {}", death_plane);
 
     let floor = death_plane + 2;
-
-    let (min_x, max_x) = map.iter().map(|(x, _)| x).minmax().into_option().unwrap();
-    let (min_x, max_x) = (*min_x, *max_x);
-
-    for y in 0..=death_plane {
-        let s: String = (min_x..=max_x)
-            .into_iter()
-            .map(|x| if map.contains(&(x, y)) { '#' } else { ' ' })
-            .collect();
-        println!("{}", s);
-    }
-
-    let wall_map = map.clone();
 
     let (mut x, mut y) = (500, 0);
     let mut count = 0;
@@ -97,7 +82,6 @@ pub fn run(input: &Vec<String>) -> AOCResult {
             }
         }
     }
-    println!("");
 
     let (min_x, max_x) = map.iter().map(|(x, _)| x).minmax().into_option().unwrap();
     let (min_x, max_x) = (*min_x, *max_x);
