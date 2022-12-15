@@ -50,6 +50,8 @@ pub fn run(input: &Vec<String>) -> AOCResult {
         }
     }
 
+    let wall_map = map.clone();
+
     let death_plane = *map.iter().map(|(_, y)| y).max().unwrap();
 
     let floor = death_plane + 2;

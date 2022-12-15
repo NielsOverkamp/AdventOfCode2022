@@ -9,7 +9,6 @@ use nom::{
 };
 use std::{
     collections::{HashMap, HashSet},
-    mem,
     ops::Range,
 };
 
@@ -126,13 +125,10 @@ pub fn run(input: &Vec<String>) -> AOCResult {
         }
     }
 
-    let (s, r): (Vec<_>, Vec<_>) = sensors.clone().into_iter().unzip();
-    let (sx, sy): (Vec<_>, Vec<_>) = s.into_iter().unzip();
-
     let possible_locations = oor_intersections.iter().filter(|(_, n)| **n >= 4);
     println!("l={:?}", possible_locations.clone().map(|(i, _)| i).collect::<Vec<_>>().as_slice());
     let mut location = None;
-    for (pos, n) in possible_locations {
+    for (pos, _) in possible_locations {
         let mut in_range = false;
         for (sensor, range) in sensors.iter() {
             if (sensor.0.abs_diff(pos.0) + sensor.1.abs_diff(pos.1)) as Num <= *range {
